@@ -1,3 +1,25 @@
+/* Dropdown animations */
+@keyframes menuOpen {
+  from { opacity: 0; transform: scale(0.98) translateY(-6px); }
+  to { opacity: 1; transform: scale(1) translateY(0); }
+}
+@keyframes menuClose {
+  from { opacity: 1; transform: scale(1) translateY(0); }
+  to { opacity: 0; transform: scale(0.98) translateY(-6px); }
+}
+
+/* Hover/active highlight with pointer marker */
+.nav-link {
+  position: relative;
+}
+.nav-link:hover,
+.nav-link.active {
+  background: rgba(52, 152, 219, 0.12);
+}
+.dark-mode .nav-link:hover,
+.dark-mode .nav-link.active {
+  background: rgba(97, 218, 251, 0.12);
+}
 /* Reset and Base Styles */
 * {
   margin: 0;
@@ -234,10 +256,14 @@ body {
   cursor: pointer;
   align-items: center;
   justify-content: center;
+  flex-direction: column;
 }
 
 .nav-toggle:hover { background: rgba(0,0,0,0.05); }
 .dark-mode .nav-toggle:hover { background: rgba(255,255,255,0.08); }
+
+.nav-toggle-icon { color: #2c3e50; }
+.dark-mode .nav-toggle-icon { color: #e5e7eb; }
 
 .nav-toggle-bar {
   display: block;
@@ -248,6 +274,16 @@ body {
   transition: transform 0.2s ease, opacity 0.2s ease;
 }
 .dark-mode .nav-toggle-bar { background: #e5e7eb; }
+
+/* Three-dot variant */
+.nav-toggle-dot {
+  width: 5px;
+  height: 5px;
+  background: #2c3e50;
+  border-radius: 50%;
+  margin: 2px 0;
+}
+.dark-mode .nav-toggle-dot { background: #e5e7eb; }
 
 .nav-logo-svg {
   width: 36px;
@@ -267,6 +303,8 @@ body {
   font-weight: 500;
   transition: color 0.3s ease;
   position: relative;
+  padding: 10px 12px;
+  border-radius: 12px;
 }
 
 .nav-link:hover {
@@ -285,6 +323,11 @@ body {
 }
 
 .nav-link:hover::after {
+  width: 100%;
+}
+
+/* Keep underline visible when the tab is active */
+.nav-link.active::after {
   width: 100%;
 }
 
@@ -1230,11 +1273,15 @@ section { scroll-margin-top: 90px; }
     margin-top: 8px;
     box-shadow: 0 10px 24px rgba(0,0,0,0.12);
     z-index: 1001;
+    transform-origin: top right;
+    animation: menuClose 180ms ease forwards;
+    text-align: center;
   }
   .dark-mode .nav-menu { background: rgba(26, 26, 26, 0.95); }
-  .nav-menu.open { display: flex; }
-  .nav-link { padding: 10px 12px; border-radius: 8px; }
-  .nav-link::after { display: none; }
+  .nav-menu.open { display: flex; animation: menuOpen 180ms ease forwards; }
+  .nav-menu.closing { display: flex; animation: menuClose 180ms ease forwards; }
+  .nav-link { display: block; padding: 12px 16px; border-radius: 12px; text-align: center; }
+  .nav-link + .nav-link { margin-top: 6px; }
   .dark-mode-toggle { align-self: center; margin: 6px 8px; }
   
   .nav-link {

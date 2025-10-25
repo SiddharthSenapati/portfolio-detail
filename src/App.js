@@ -6,12 +6,14 @@ function App() {
   const [isMouseMoving, setIsMouseMoving] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
+  const [menuClosing, setMenuClosing] = useState(false);
   const [logoSrc, setLogoSrc] = useState(`${process.env.PUBLIC_URL}/abstract-logo.png`);
   const [typedText, setTypedText] = useState('');
   const [phraseIndex, setPhraseIndex] = useState(0);
   const [charIndex, setCharIndex] = useState(0);
   const [isDeleting, setIsDeleting] = useState(false);
   const [activeTab, setActiveTab] = useState('industrial');
+  const [activeNav, setActiveNav] = useState('home');
   const [sending, setSending] = useState(false);
   const [sendResult, setSendResult] = useState(null);
   const phrases = React.useMemo(() => ['Full Stack .NET Developer', 'Web Developer', 'Tech Explorer & Continuous Learner'], []);
@@ -19,6 +21,27 @@ function App() {
   const rafRef = React.useRef(null);
   const hideTimerRef = React.useRef(null);
   const lastPosRef = React.useRef({ x: 0, y: 0 });
+
+  const scrollToSection = (id) => {
+    const el = document.getElementById(id);
+    if (!el) return;
+    const offset = 90; // match CSS scroll-margin-top-ish
+    const top = el.getBoundingClientRect().top + window.pageYOffset - offset;
+    window.scrollTo({ top, behavior: 'smooth' });
+    // remove hash from URL
+    const url = window.location.pathname + window.location.search;
+    window.history.replaceState(null, '', url);
+  };
+
+  const handleNavClick = (e, id) => {
+    e.preventDefault();
+    setActiveNav(id);
+    scrollToSection(id);
+    if (mobileOpen) {
+      setMenuClosing(true);
+      setTimeout(() => { setMobileOpen(false); setMenuClosing(false); }, 180);
+    }
+  };
 
   useEffect(() => {
     const shouldPauseTracking = (target) => {
@@ -57,12 +80,28 @@ function App() {
 
     const onScroll = () => {
       setScrolled(window.scrollY > 10);
+      const ids = ['home', 'about', 'experience', 'education', 'skills', 'projects', 'contact'];
+      let current = 'home';
+      const offset = 120; // account for fixed navbar height
+      for (const id of ids) {
+        const el = document.getElementById(id);
+        if (!el) continue;
+        const rect = el.getBoundingClientRect();
+        if (rect.top - offset <= 0) current = id;
+      }
+      setActiveNav(current);
     };
 
     window.addEventListener('mousemove', handleMouseMove, { passive: true });
     window.addEventListener('mouseleave', handleMouseLeave);
     window.addEventListener('scroll', onScroll, { passive: true });
     onScroll();
+
+    // If page loaded with a hash, scroll to it and clean URL
+    if (window.location.hash) {
+      const id = window.location.hash.replace('#','');
+      setTimeout(() => scrollToSection(id), 50);
+    }
 
     return () => {
       window.removeEventListener('mousemove', handleMouseMove);
@@ -171,24 +210,46 @@ function App() {
           </div>
           <button
             className={`nav-toggle ${mobileOpen ? 'open' : ''}`}
-            onClick={() => setMobileOpen(o => !o)}
+            onClick={() => {
+              if (mobileOpen) {
+                setMenuClosing(true);
+                setTimeout(() => { setMobileOpen(false); setMenuClosing(false); }, 180);
+              } else {
+                setMobileOpen(true);
+              }
+            }}
             aria-label="Toggle menu"
             aria-expanded={mobileOpen}
             aria-controls="primary-navigation"
             type="button"
           >
-            <span className="nav-toggle-bar" />
-            <span className="nav-toggle-bar" />
-            <span className="nav-toggle-bar" />
+            {!(mobileOpen || menuClosing) ? (
+              <svg className="nav-toggle-icon" width="22" height="22" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                <circle cx="5" cy="5" r="2"></circle>
+                <circle cx="12" cy="5" r="2"></circle>
+                <circle cx="19" cy="5" r="2"></circle>
+                <circle cx="5" cy="12" r="2"></circle>
+                <circle cx="12" cy="12" r="2"></circle>
+                <circle cx="19" cy="12" r="2"></circle>
+                <circle cx="5" cy="19" r="2"></circle>
+                <circle cx="12" cy="19" r="2"></circle>
+                <circle cx="19" cy="19" r="2"></circle>
+              </svg>
+            ) : (
+              <svg className="nav-toggle-icon" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true">
+                <path d="M6 6L18 18" />
+                <path d="M18 6L6 18" />
+              </svg>
+            )}
           </button>
-          <div id="primary-navigation" className={`nav-menu ${mobileOpen ? 'open' : ''}`}>
-            <a href="#home" className="nav-link" onClick={() => setMobileOpen(false)}>Home</a>
-            <a href="#about" className="nav-link" onClick={() => setMobileOpen(false)}>About</a>
-            <a href="#experience" className="nav-link" onClick={() => setMobileOpen(false)}>Experience</a>
-            <a href="#education" className="nav-link" onClick={() => setMobileOpen(false)}>Education</a>
-            <a href="#skills" className="nav-link" onClick={() => setMobileOpen(false)}>Skills</a>
-            <a href="#projects" className="nav-link" onClick={() => setMobileOpen(false)}>Projects</a>
-            <a href="#contact" className="nav-link" onClick={() => setMobileOpen(false)}>Contact</a>
+          <div id="primary-navigation" className={`nav-menu ${mobileOpen ? 'open' : ''} ${menuClosing ? 'closing' : ''}`}>
+            <a href="#home" className={`nav-link ${activeNav==='home' ? 'active' : ''}`} onClick={(e) => handleNavClick(e,'home')}>Home</a>
+            <a href="#about" className={`nav-link ${activeNav==='about' ? 'active' : ''}`} onClick={(e) => handleNavClick(e,'about')}>About</a>
+            <a href="#experience" className={`nav-link ${activeNav==='experience' ? 'active' : ''}`} onClick={(e) => handleNavClick(e,'experience')}>Experience</a>
+            <a href="#education" className={`nav-link ${activeNav==='education' ? 'active' : ''}`} onClick={(e) => handleNavClick(e,'education')}>Education</a>
+            <a href="#skills" className={`nav-link ${activeNav==='skills' ? 'active' : ''}`} onClick={(e) => handleNavClick(e,'skills')}>Skills</a>
+            <a href="#projects" className={`nav-link ${activeNav==='projects' ? 'active' : ''}`} onClick={(e) => handleNavClick(e,'projects')}>Projects</a>
+            <a href="#contact" className={`nav-link ${activeNav==='contact' ? 'active' : ''}`} onClick={(e) => handleNavClick(e,'contact')}>Contact</a>
             <button
               className="dark-mode-toggle"
               onClick={toggleDarkMode}
