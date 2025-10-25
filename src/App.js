@@ -5,7 +5,7 @@ function App() {
   const [darkMode, setDarkMode] = useState(true);
   const [isMouseMoving, setIsMouseMoving] = useState(false);
   const [scrolled, setScrolled] = useState(false);
-  const [logoSrc, setLogoSrc] = useState('/abstract-logo.svg');
+  const [logoSrc, setLogoSrc] = useState(`${process.env.PUBLIC_URL}/abstract-logo.png`);
   const [typedText, setTypedText] = useState('');
   const [phraseIndex, setPhraseIndex] = useState(0);
   const [charIndex, setCharIndex] = useState(0);
@@ -162,7 +162,7 @@ function App() {
           <div className="nav-logo">
             <img
               src={logoSrc}
-              onError={() => setLogoSrc('/abstract-logo.png')}
+              onError={() => setLogoSrc(`${process.env.PUBLIC_URL}/abstract-logo.png`)}
               alt="Siddharth Senapati Logo"
               title="Siddharth Senapati"
               className="nav-logo-img"
@@ -205,7 +205,7 @@ function App() {
               <div className="profile-image">
                 <div className="image-placeholder">
                   <img 
-                    src="/profile.jpg" 
+                    src={`${process.env.PUBLIC_URL}/profile.jpg`} 
                     alt="Siddharth Senapati" 
                     className="profile-img"
                   />
@@ -221,7 +221,7 @@ function App() {
               <div className="hero-buttons">
                 <a href="#projects" className="btn btn-primary">View My Work</a>
                 <a href="#contact" className="btn btn-secondary">Get In Touch</a>
-                <a href="/resume.pdf" download="Siddharth_Senapati_Resume.pdf" className="btn btn-secondary">Download Resume</a>
+                <a href={`${process.env.PUBLIC_URL}/resume.pdf`} download="Siddharth_Senapati_Resume.pdf" className="btn btn-secondary">Download Resume</a>
               </div>
             </div>
           </div>
@@ -319,32 +319,32 @@ function App() {
               <h3>Backend Development</h3>
               <div className="skills-grid">
                 <div className="skill-card" title="ASP.NET">
-                  <img className="skill-card-img" src="/techs/aspnet-webforms.png" alt="ASP.NET Web Forms"
+                  <img className="skill-card-img" src={`${process.env.PUBLIC_URL}/techs/aspnet-webforms.png`} alt="ASP.NET Web Forms"
                        onError={(e)=>{e.currentTarget.style.display='none'; e.currentTarget.nextElementSibling.style.display='block';}} />
                   <div className="skill-card-label" style={{display:'none'}}>ASP.NET Web Forms</div>
                 </div>
                 <div className="skill-card" title="ASP.NET MVC">
-                  <img className="skill-card-img" src="/techs/aspnet-mvc.png" alt="ASP.NET MVC"
+                  <img className="skill-card-img" src={`${process.env.PUBLIC_URL}/techs/aspnet-mvc.png`} alt="ASP.NET MVC"
                        onError={(e)=>{e.currentTarget.style.display='none'; e.currentTarget.nextElementSibling.style.display='block';}} />
                   <div className="skill-card-label" style={{display:'none'}}>ASP.NET MVC</div>
                 </div>
                 <div className="skill-card" title="ASP.NET Core Web API">
-                  <img className="skill-card-img" src="/techs/Dotnet-core-log.png" alt="ASP.NET Core Web API"
+                  <img className="skill-card-img" src={`${process.env.PUBLIC_URL}/techs/Dotnet-core-log.png`} alt="ASP.NET Core Web API"
                        onError={(e)=>{e.currentTarget.style.display='none'; e.currentTarget.nextElementSibling.style.display='block';}} />
                   <div className="skill-card-label" style={{display:'none'}}>ASP.NET Core Web API</div>
                 </div>
                 <div className="skill-card" title="LINQ">
-                  <img className="skill-card-img" src="/techs/linq-dotnet-logo.png" alt="ASP.NET Core Web API"
+                  <img className="skill-card-img" src={`${process.env.PUBLIC_URL}/techs/linq-dotnet-logo.png`} alt="ASP.NET Core Web API"
                        onError={(e)=>{e.currentTarget.style.display='none'; e.currentTarget.nextElementSibling.style.display='block';}} />
                   <div className="skill-card-label" style={{display:'none'}}>ASP.NET Core Web API</div>
                 </div>
                 <div className="skill-card" title="C#">
-                  <img className="skill-card-img" src="/techs/csharp.png" alt="C#"
+                  <img className="skill-card-img" src={`${process.env.PUBLIC_URL}/techs/csharp.png`} alt="C#"
                        onError={(e)=>{e.currentTarget.style.display='none'; e.currentTarget.nextElementSibling.style.display='block';}} />
                   <div className="skill-card-label" style={{display:'none'}}>C#</div>
                 </div>
                 <div className="skill-card" title="SQL Server">
-                  <img className="skill-card-img" src="/techs/MSSQL-logo.png" alt="SQL Server"
+                  <img className="skill-card-img" src={`${process.env.PUBLIC_URL}/techs/MSSQL-logo.png`} alt="SQL Server"
                        onError={(e)=>{e.currentTarget.style.display='none'; e.currentTarget.nextElementSibling.style.display='block';}} />
                   <div className="skill-card-label" style={{display:'none'}}>SQL Server</div>
                 </div>
@@ -354,27 +354,27 @@ function App() {
               <h3>Frontend Development</h3>
               <div className="skills-grid">
                 <div className="skill-card" title="JQuery">
-                  <img className="skill-card-img" src="/techs/JQuery-logo.png" alt="JQuery"
+                  <img className="skill-card-img" src={`${process.env.PUBLIC_URL}/techs/JQuery-logo.png`} alt="JQuery"
                        onError={(e)=>{e.currentTarget.style.display='none'; e.currentTarget.nextElementSibling.style.display='block';}} />
                   <div className="skill-card-label" style={{display:'none'}}>JQuery</div>
                 </div>
                 <div className="skill-card" title="JavaScript">
-                  <img className="skill-card-img" src="/techs/javascript.png" alt="JavaScript"
+                  <img className="skill-card-img" src={`${process.env.PUBLIC_URL}/techs/javascript.png`} alt="JavaScript"
                        onError={(e)=>{e.currentTarget.style.display='none'; e.currentTarget.nextElementSibling.style.display='block';}} />
                   <div className="skill-card-label" style={{display:'none'}}>JavaScript</div>
                 </div>
                 <div className="skill-card" title="HTML">
-                  <img className="skill-card-img" src="/techs/HTML-logo.png" alt="HTML/CSS"
+                  <img className="skill-card-img" src={`${process.env.PUBLIC_URL}/techs/HTML-logo.png`} alt="HTML/CSS"
                        onError={(e)=>{e.currentTarget.style.display='none'; e.currentTarget.nextElementSibling.style.display='block';}} />
                   <div className="skill-card-label" style={{display:'none'}}>HTML/CSS</div>
                 </div>
                 <div className="skill-card" title="CSS">
-                  <img className="skill-card-img" src="/techs/CSS-logo.png" alt="CSS"
+                  <img className="skill-card-img" src={`${process.env.PUBLIC_URL}/techs/CSS-logo.png`} alt="CSS"
                        onError={(e)=>{e.currentTarget.style.display='none'; e.currentTarget.nextElementSibling.style.display='block';}} />
                   <div className="skill-card-label" style={{display:'none'}}>CSS</div>
                 </div>
                 <div className="skill-card" title="AJAX">
-                  <img className="skill-card-img" src="/techs/AJAX-logo.png" alt="AJAX"
+                  <img className="skill-card-img" src={`${process.env.PUBLIC_URL}/techs/AJAX-logo.png`} alt="AJAX"
                        onError={(e)=>{e.currentTarget.style.display='none'; e.currentTarget.nextElementSibling.style.display='block';}} />
                   <div className="skill-card-label" style={{display:'none'}}>AJAX</div>
                 </div>
@@ -384,32 +384,32 @@ function App() {
               <h3>Programming & Tools</h3>
               <div className="skills-grid">
                 <div className="skill-card" title="Java">
-                  <img className="skill-card-img" src="/techs/java-logo.png" alt="Java"
+                  <img className="skill-card-img" src={`${process.env.PUBLIC_URL}/techs/JAVA-logo.png`} alt="Java"
                        onError={(e)=>{e.currentTarget.style.display='none'; e.currentTarget.nextElementSibling.style.display='block';}} />
                   <div className="skill-card-label" style={{display:'none'}}>Java</div>
                 </div>
                 <div className="skill-card" title="OOPS">
-                  <img className="skill-card-img" src="/techs/OOPS-logo.png" alt="OOPS"
+                  <img className="skill-card-img" src={`${process.env.PUBLIC_URL}/techs/OOPS-logo.png`} alt="OOPS"
                        onError={(e)=>{e.currentTarget.style.display='none'; e.currentTarget.nextElementSibling.style.display='block';}} />
                   <div className="skill-card-label" style={{display:'none'}}>OOPS</div>
                 </div>
                 <div className="skill-card" title="Visual Studio">
-                  <img className="skill-card-img" src="/techs/VS-logo.png" alt="Visual Studio"
+                  <img className="skill-card-img" src={`${process.env.PUBLIC_URL}/techs/VS-logo.png`} alt="Visual Studio"
                        onError={(e)=>{e.currentTarget.style.display='none'; e.currentTarget.nextElementSibling.style.display='block';}} />
                   <div className="skill-card-label" style={{display:'none'}}>Visual Studio</div>
                 </div>
                 <div className="skill-card" title="Kendo-UI">
-                  <img className="skill-card-img" src="/techs/KENDO-logo.png" alt="Kendo-UI"
+                  <img className="skill-card-img" src={`${process.env.PUBLIC_URL}/techs/KENDO-logo.png`} alt="Kendo-UI"
                        onError={(e)=>{e.currentTarget.style.display='none'; e.currentTarget.nextElementSibling.style.display='block';}} />
                   <div className="skill-card-label" style={{display:'none'}}>Kendo-UI</div>
                 </div>
                 <div className="skill-card" title="Telerik">
-                  <img className="skill-card-img" src="/techs/Telerik-logo.png" alt="Telerik"
+                  <img className="skill-card-img" src={`${process.env.PUBLIC_URL}/techs/Telerik-logo.png`} alt="Telerik"
                        onError={(e)=>{e.currentTarget.style.display='none'; e.currentTarget.nextElementSibling.style.display='block';}} />
                   <div className="skill-card-label" style={{display:'none'}}>Telerik</div>
                 </div>
                 <div className="skill-card" title="JIRA">
-                  <img className="skill-card-img" src="/techs/JIRA-logo.png" alt="JIRA"
+                  <img className="skill-card-img" src={`${process.env.PUBLIC_URL}/techs/JIRA-logo.png`} alt="JIRA"
                        onError={(e)=>{e.currentTarget.style.display='none'; e.currentTarget.nextElementSibling.style.display='block';}} />
                   <div className="skill-card-label" style={{display:'none'}}>JIRA</div>
                 </div>
@@ -429,7 +429,7 @@ function App() {
               onClick={() => setActiveTab('industrial')}
               type="button"
             >
-              <img className="tab-icon" src="/icons/industry.svg" alt="" aria-hidden="true" />
+              <img className="tab-icon" src={`${process.env.PUBLIC_URL}/icons/industry.svg`} alt="" aria-hidden="true" />
               Industrial Projects
             </button>
             <button
@@ -437,7 +437,7 @@ function App() {
               onClick={() => setActiveTab('personal')}
               type="button"
             >
-              <img className="tab-icon" src="/icons/user.svg" alt="" aria-hidden="true" />
+              <img className="tab-icon" src={`${process.env.PUBLIC_URL}/icons/user.svg`} alt="" aria-hidden="true" />
               Personal Projects
             </button>
           </div>
@@ -448,7 +448,7 @@ function App() {
                   <div className="project-image">
                     <img
                       className="project-img"
-                      src={"/hospital-management-system.png"}
+                      src={`${process.env.PUBLIC_URL}/hospital-management-system.png`}
                       alt="Hospital Management System"
                       loading="lazy"
                       onLoad={(e) => { const ph = e.currentTarget.nextElementSibling; if (ph) ph.style.display = 'none'; }}
@@ -459,9 +459,9 @@ function App() {
                   <div className="project-content">
                     <h3>Hospital Management System</h3>
                     <div className="project-tech">
-                      <span className="tech-badge logo"><img className="tech-logo" src="/techs/aspnet-mvc.svg" alt="ASP.NET MVC" onError={(e)=>{e.currentTarget.style.display='none'; e.currentTarget.nextElementSibling.style.display='inline';}} /><span className="tech-fallback" style={{display:'none'}}>ASP.NET Web Forms</span></span>
-                      <span className="tech-badge logo"><img className="tech-logo" src="/techs/csharp.svg" alt="C#" onError={(e)=>{e.currentTarget.style.display='none'; e.currentTarget.nextElementSibling.style.display='inline';}} /><span className="tech-fallback" style={{display:'none'}}>C#</span></span>
-                      <span className="tech-badge logo"><img className="tech-logo" src="/techs/sql-server.svg" alt="SQL Server" onError={(e)=>{e.currentTarget.style.display='none'; e.currentTarget.nextElementSibling.style.display='inline';}} /><span className="tech-fallback" style={{display:'none'}}>SQL Server</span></span>
+                      <span className="tech-badge logo"><img className="tech-logo" src={`${process.env.PUBLIC_URL}/techs/aspnet-mvc.svg`} alt="ASP.NET MVC" onError={(e)=>{e.currentTarget.style.display='none'; e.currentTarget.nextElementSibling.style.display='inline';}} /><span className="tech-fallback" style={{display:'none'}}>ASP.NET Web Forms</span></span>
+                      <span className="tech-badge logo"><img className="tech-logo" src={`${process.env.PUBLIC_URL}/techs/csharp.svg`} alt="C#" onError={(e)=>{e.currentTarget.style.display='none'; e.currentTarget.nextElementSibling.style.display='inline';}} /><span className="tech-fallback" style={{display:'none'}}>C#</span></span>
+                      <span className="tech-badge logo"><img className="tech-logo" src={`${process.env.PUBLIC_URL}/techs/sql-server.svg`} alt="SQL Server" onError={(e)=>{e.currentTarget.style.display='none'; e.currentTarget.nextElementSibling.style.display='inline';}} /><span className="tech-fallback" style={{display:'none'}}>SQL Server</span></span>
                     </div>
                     <ul className="project-points">
                       <li>Designed and delivered an end-to-end HMS covering patients, doctors, appointments, billing, pharmacy, labs, and reports with robust role-based access.</li>
@@ -475,7 +475,7 @@ function App() {
                   <div className="project-image">
                     <img
                       className="project-img"
-                      src={"/patient-Management-system.png"}
+                      src={`${process.env.PUBLIC_URL}/patient-Management-system.png`}
                       alt="Patient Administration System"
                       loading="lazy"
                       onLoad={(e) => { const ph = e.currentTarget.nextElementSibling; if (ph) ph.style.display = 'none'; }}
@@ -487,8 +487,8 @@ function App() {
                     <h3>Patient Administration System</h3>
                     <div className="project-tech">
                       <span>ASP.NET Core Web API</span><span>C#</span>
-                      <span className="tech-badge logo"><img className="tech-logo" src="/techs/jquery.svg" alt="jQuery" onError={(e)=>{e.currentTarget.style.display='none'; e.currentTarget.nextElementSibling.style.display='inline';}} /><span className="tech-fallback" style={{display:'none'}}>jQuery</span></span>
-                      <span className="tech-badge logo"><img className="tech-logo" src="/techs/sql-server.svg" alt="SQL Server" onError={(e)=>{e.currentTarget.style.display='none'; e.currentTarget.nextElementSibling.style.display='inline';}} /><span className="tech-fallback" style={{display:'none'}}>SQL Server</span></span>
+                      <span className="tech-badge logo"><img className="tech-logo" src={`${process.env.PUBLIC_URL}/techs/jquery.svg`} alt="jQuery" onError={(e)=>{e.currentTarget.style.display='none'; e.currentTarget.nextElementSibling.style.display='inline';}} /><span className="tech-fallback" style={{display:'none'}}>jQuery</span></span>
+                      <span className="tech-badge logo"><img className="tech-logo" src={`${process.env.PUBLIC_URL}/techs/sql-server.svg`} alt="SQL Server" onError={(e)=>{e.currentTarget.style.display='none'; e.currentTarget.nextElementSibling.style.display='inline';}} /><span className="tech-fallback" style={{display:'none'}}>SQL Server</span></span>
                     </div>
                     <ul className="project-points">
                       <li>Administrative workflows for admissions, discharge, transfers, and medical records with role-based controls.</li>
@@ -502,7 +502,7 @@ function App() {
                   <div className="project-image">
                     <img
                       className="project-img"
-                      src={"/stock-clearance-system.png"}
+                      src={`${process.env.PUBLIC_URL}/stock-clearance-system.png`}
                       alt="Stock Clearance System"
                       loading="lazy"
                       onLoad={(e) => { const ph = e.currentTarget.nextElementSibling; if (ph) ph.style.display = 'none'; }}
@@ -526,7 +526,7 @@ function App() {
                   <div className="project-image">
                     <img
                       className="project-img"
-                      src="/student-management-system.png"
+                      src={`${process.env.PUBLIC_URL}/student-management-system.png`}
                       alt="Student Management System"
                       loading="lazy"
                       onLoad={(e) => { const ph = e.currentTarget.nextElementSibling; if (ph) ph.style.display = 'none'; }}
@@ -553,7 +553,7 @@ function App() {
                   <div className="project-image">
                     <img
                       className="project-img"
-                      src="/techs/Emp-project-logo.png"
+                      src={`${process.env.PUBLIC_URL}/techs/Emp-project-logo.png`}
                       alt="Employee Management System"
                       loading="lazy"
                       onLoad={(e) => { const ph = e.currentTarget.nextElementSibling; if (ph) ph.style.display = 'none'; }}
@@ -564,10 +564,10 @@ function App() {
                   <div className="project-content">
                     <h3>Employee Management System</h3>
                     <div className="project-tech">
-                      <span className="tech-badge logo"><img className="tech-logo" src="/techs/aspnet-mvc.svg" alt="ASP.NET MVC" onError={(e)=>{e.currentTarget.style.display='none'; e.currentTarget.nextElementSibling.style.display='inline';}} /><span className="tech-fallback" style={{display:'none'}}>ASP.NET MVC</span></span>
-                      <span className="tech-badge logo"><img className="tech-logo" src="/techs/csharp.svg" alt="C#" onError={(e)=>{e.currentTarget.style.display='none'; e.currentTarget.nextElementSibling.style.display='inline';}} /><span className="tech-fallback" style={{display:'none'}}>C#</span></span>
-                      <span className="tech-badge logo"><img className="tech-logo" src="/techs/sql-server.svg" alt="SQL Server" onError={(e)=>{e.currentTarget.style.display='none'; e.currentTarget.nextElementSibling.style.display='inline';}} /><span className="tech-fallback" style={{display:'none'}}>SQL Server</span></span>
-                      <span className="tech-badge logo"><img className="tech-logo" src="/techs/jquery.svg" alt="jQuery" onError={(e)=>{e.currentTarget.style.display='none'; e.currentTarget.nextElementSibling.style.display='inline';}} /><span className="tech-fallback" style={{display:'none'}}>jQuery</span></span>
+                      <span className="tech-badge logo"><img className="tech-logo" src={`${process.env.PUBLIC_URL}/techs/aspnet-mvc.svg`} alt="ASP.NET MVC" onError={(e)=>{e.currentTarget.style.display='none'; e.currentTarget.nextElementSibling.style.display='inline';}} /><span className="tech-fallback" style={{display:'none'}}>ASP.NET MVC</span></span>
+                      <span className="tech-badge logo"><img className="tech-logo" src={`${process.env.PUBLIC_URL}/techs/csharp.svg`} alt="C#" onError={(e)=>{e.currentTarget.style.display='none'; e.currentTarget.nextElementSibling.style.display='inline';}} /><span className="tech-fallback" style={{display:'none'}}>C#</span></span>
+                      <span className="tech-badge logo"><img className="tech-logo" src={`${process.env.PUBLIC_URL}/techs/sql-server.svg`} alt="SQL Server" onError={(e)=>{e.currentTarget.style.display='none'; e.currentTarget.nextElementSibling.style.display='inline';}} /><span className="tech-fallback" style={{display:'none'}}>SQL Server</span></span>
+                      <span className="tech-badge logo"><img className="tech-logo" src={`${process.env.PUBLIC_URL}/techs/jquery.svg`} alt="jQuery" onError={(e)=>{e.currentTarget.style.display='none'; e.currentTarget.nextElementSibling.style.display='inline';}} /><span className="tech-fallback" style={{display:'none'}}>jQuery</span></span>
                     </div>
                     <ul className="project-points">
                       <li>Employee profile CRUD, departments, and roles with role-based access.</li>
@@ -582,7 +582,7 @@ function App() {
                   <div className="project-image">
                     <img
                       className="project-img"
-                      src="/techs/Task-project-logo.png"
+                      src={`${process.env.PUBLIC_URL}/techs/Task-project-logo.png`}
                       alt="Task Management System"
                       loading="lazy"
                       onLoad={(e) => { const ph = e.currentTarget.nextElementSibling; if (ph) ph.style.display = 'none'; }}
@@ -593,10 +593,10 @@ function App() {
                   <div className="project-content">
                     <h3>Task Management System</h3>
                     <div className="project-tech">
-                      <span className="tech-badge logo"><img className="tech-logo" src="/techs/aspnet-mvc.svg" alt="ASP.NET MVC" onError={(e)=>{e.currentTarget.style.display='none'; e.currentTarget.nextElementSibling.style.display='inline';}} /><span className="tech-fallback" style={{display:'none'}}>ASP.NET Core Web API</span></span>
-                      <span className="tech-badge logo"><img className="tech-logo" src="/techs/csharp.svg" alt="C#" onError={(e)=>{e.currentTarget.style.display='none'; e.currentTarget.nextElementSibling.style.display='inline';}} /><span className="tech-fallback" style={{display:'none'}}>C#</span></span>
-                      <span className="tech-badge logo"><img className="tech-logo" src="/techs/sql-server.svg" alt="SQL Server" onError={(e)=>{e.currentTarget.style.display='none'; e.currentTarget.nextElementSibling.style.display='inline';}} /><span className="tech-fallback" style={{display:'none'}}>SQL Server</span></span>
-                      <span className="tech-badge logo"><img className="tech-logo" src="/techs/jquery.svg" alt="jQuery" onError={(e)=>{e.currentTarget.style.display='none'; e.currentTarget.nextElementSibling.style.display='inline';}} /><span className="tech-fallback" style={{display:'none'}}>jQuery</span></span>
+                      <span className="tech-badge logo"><img className="tech-logo" src={`${process.env.PUBLIC_URL}/techs/aspnet-mvc.svg`} alt="ASP.NET MVC" onError={(e)=>{e.currentTarget.style.display='none'; e.currentTarget.nextElementSibling.style.display='inline';}} /><span className="tech-fallback" style={{display:'none'}}>ASP.NET Core Web API</span></span>
+                      <span className="tech-badge logo"><img className="tech-logo" src={`${process.env.PUBLIC_URL}/techs/csharp.svg`} alt="C#" onError={(e)=>{e.currentTarget.style.display='none'; e.currentTarget.nextElementSibling.style.display='inline';}} /><span className="tech-fallback" style={{display:'none'}}>C#</span></span>
+                      <span className="tech-badge logo"><img className="tech-logo" src={`${process.env.PUBLIC_URL}/techs/sql-server.svg`} alt="SQL Server" onError={(e)=>{e.currentTarget.style.display='none'; e.currentTarget.nextElementSibling.style.display='inline';}} /><span className="tech-fallback" style={{display:'none'}}>SQL Server</span></span>
+                      <span className="tech-badge logo"><img className="tech-logo" src={`${process.env.PUBLIC_URL}/techs/jquery.svg`} alt="jQuery" onError={(e)=>{e.currentTarget.style.display='none'; e.currentTarget.nextElementSibling.style.display='inline';}} /><span className="tech-fallback" style={{display:'none'}}>jQuery</span></span>
                     </div>
                     <ul className="project-points">
                       <li>Create, assign, and track tasks with status, priority, deadline, and owners.</li>
@@ -610,7 +610,7 @@ function App() {
                   <div className="project-image">
                     <img
                       className="project-img"
-                      src="/techs/Reg-project-logo.png"
+                      src={`${process.env.PUBLIC_URL}/techs/Reg-project-logo.png`}
                       alt="Full Fledged Registration Page"
                       loading="lazy"
                       onLoad={(e) => { const ph = e.currentTarget.nextElementSibling; if (ph) ph.style.display = 'none'; }}
@@ -622,9 +622,9 @@ function App() {
                     <h3>Full Fledged Registration Page</h3>
                     <div className="project-tech">
                       <span>ASP.NET Web Forms</span>
-                      <span className="tech-badge logo"><img className="tech-logo" src="/techs/layers.svg" alt="3-Tier" onError={(e)=>{e.currentTarget.style.display='none'; e.currentTarget.nextElementSibling.style.display='inline';}} /><span className="tech-fallback" style={{display:'none'}}>3-Tier</span></span>
-                      <span className="tech-badge logo"><img className="tech-logo" src="/techs/jquery.svg" alt="jQuery" onError={(e)=>{e.currentTarget.style.display='none'; e.currentTarget.nextElementSibling.style.display='inline';}} /><span className="tech-fallback" style={{display:'none'}}>jQuery</span></span>
-                      <span className="tech-badge logo"><img className="tech-logo" src="/techs/sql-server.svg" alt="SQL Server" onError={(e)=>{e.currentTarget.style.display='none'; e.currentTarget.nextElementSibling.style.display='inline';}} /><span className="tech-fallback" style={{display:'none'}}>SQL Server</span></span>
+                      <span className="tech-badge logo"><img className="tech-logo" src={`${process.env.PUBLIC_URL}/techs/layers.svg`} alt="3-Tier" onError={(e)=>{e.currentTarget.style.display='none'; e.currentTarget.nextElementSibling.style.display='inline';}} /><span className="tech-fallback" style={{display:'none'}}>3-Tier</span></span>
+                      <span className="tech-badge logo"><img className="tech-logo" src={`${process.env.PUBLIC_URL}/techs/jquery.svg`} alt="jQuery" onError={(e)=>{e.currentTarget.style.display='none'; e.currentTarget.nextElementSibling.style.display='inline';}} /><span className="tech-fallback" style={{display:'none'}}>jQuery</span></span>
+                      <span className="tech-badge logo"><img className="tech-logo" src={`${process.env.PUBLIC_URL}/techs/sql-server.svg`} alt="SQL Server" onError={(e)=>{e.currentTarget.style.display='none'; e.currentTarget.nextElementSibling.style.display='inline';}} /><span className="tech-fallback" style={{display:'none'}}>SQL Server</span></span>
                     </div>
                     <ul className="project-points">
                       <li>Three-tier architecture: UI, Business Logic, and Data Access layers for maintainability.</li>
