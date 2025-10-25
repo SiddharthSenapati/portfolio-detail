@@ -5,6 +5,7 @@ function App() {
   const [darkMode, setDarkMode] = useState(true);
   const [isMouseMoving, setIsMouseMoving] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const [mobileOpen, setMobileOpen] = useState(false);
   const [logoSrc, setLogoSrc] = useState(`${process.env.PUBLIC_URL}/abstract-logo.png`);
   const [typedText, setTypedText] = useState('');
   const [phraseIndex, setPhraseIndex] = useState(0);
@@ -168,19 +169,32 @@ function App() {
               className="nav-logo-img"
             />
           </div>
-          <div className="nav-menu">
-            <a href="#home" className="nav-link">Home</a>
-            <a href="#about" className="nav-link">About</a>
-            <a href="#experience" className="nav-link">Experience</a>
-            <a href="#education" className="nav-link">Education</a>
-            <a href="#skills" className="nav-link">Skills</a>
-            <a href="#projects" className="nav-link">Projects</a>
-            <a href="#contact" className="nav-link">Contact</a>
+          <button
+            className={`nav-toggle ${mobileOpen ? 'open' : ''}`}
+            onClick={() => setMobileOpen(o => !o)}
+            aria-label="Toggle menu"
+            aria-expanded={mobileOpen}
+            aria-controls="primary-navigation"
+            type="button"
+          >
+            <span className="nav-toggle-bar" />
+            <span className="nav-toggle-bar" />
+            <span className="nav-toggle-bar" />
+          </button>
+          <div id="primary-navigation" className={`nav-menu ${mobileOpen ? 'open' : ''}`}>
+            <a href="#home" className="nav-link" onClick={() => setMobileOpen(false)}>Home</a>
+            <a href="#about" className="nav-link" onClick={() => setMobileOpen(false)}>About</a>
+            <a href="#experience" className="nav-link" onClick={() => setMobileOpen(false)}>Experience</a>
+            <a href="#education" className="nav-link" onClick={() => setMobileOpen(false)}>Education</a>
+            <a href="#skills" className="nav-link" onClick={() => setMobileOpen(false)}>Skills</a>
+            <a href="#projects" className="nav-link" onClick={() => setMobileOpen(false)}>Projects</a>
+            <a href="#contact" className="nav-link" onClick={() => setMobileOpen(false)}>Contact</a>
             <button
               className="dark-mode-toggle"
               onClick={toggleDarkMode}
               title={darkMode ? 'Light mode' : 'Dark mode'}
               aria-label={darkMode ? 'Switch to light mode' : 'Switch to dark mode'}
+              type="button"
             >
               {darkMode ? (
                 <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
