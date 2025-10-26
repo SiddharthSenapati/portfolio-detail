@@ -330,7 +330,7 @@ function App() {
               <div className="experience-content">
                 <h3>.NET Developer</h3>
                 <h4>Concept Infoway Pvt. Ltd., Ahmedabad</h4>
-                <p>Flourishing at Concept Infoway, bringing web applications to life with ASP.NET, MVC, C#, and SQL Server. Efficiently solving approximately 15 Jira issues per week and achieving 14% coding optimization. An energetic team player who works across functions to create, test and release quality web solutions.</p>
+                <p>Flourishing at Concept Infoway, bringing web applications to life with ASP.NET, C#, and SQL Server. Efficiently solving approximately 15 Jira issues per month and achieving +20% coding optimization. An energetic team player who works across functions to create, test and release quality web solutions.</p>
                 <div className="experience-tech">
                   <span>ASP.NET Core</span>
                   <span>C#</span>
