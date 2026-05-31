@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import './App.css';
 
 function App() {
@@ -16,11 +16,13 @@ function App() {
   const [activeNav, setActiveNav] = useState('home');
   const [sending, setSending] = useState(false);
   const [sendResult, setSendResult] = useState(null);
+  const [pageLoaded, setPageLoaded] = useState(false);
   const phrases = React.useMemo(() => ['Full Stack .NET Developer', 'Web Developer', 'Tech Explorer & Continuous Learner'], []);
   const mouseRef = React.useRef(null);
   const rafRef = React.useRef(null);
   const hideTimerRef = React.useRef(null);
   const lastPosRef = React.useRef({ x: 0, y: 0 });
+  const sectionRefs = useRef({});
 
   const scrollToSection = (id) => {
     const el = document.getElementById(id);
@@ -189,8 +191,78 @@ function App() {
       return () => clearTimeout(t);
     }
   }, [sendResult]);
+
+  // Page load animation
+  useEffect(() => {
+    setPageLoaded(true);
+  }, []);
+
+  // Scroll animation for sections
+  useEffect(() => {
+    const observerOptions = {
+      threshold: 0.1,
+      rootMargin: '0px 0px -50px 0px'
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+        }
+      });
+    }, observerOptions);
+
+    const sections = document.querySelectorAll('.section-animate');
+    sections.forEach(section => observer.observe(section));
+
+    return () => observer.disconnect();
+  }, []);
+
+  // Lazy Image Component
+  const LazyImage = ({ src, alt, className, ...props }) => {
+    const [loaded, setLoaded] = useState(false);
+    const imgRef = useRef(null);
+
+    useEffect(() => {
+      const img = imgRef.current;
+      if (img) {
+        if (img.complete) {
+          setLoaded(true);
+        } else {
+          img.onload = () => setLoaded(true);
+        }
+      }
+    }, []);
+
+    return (
+      <img
+        ref={imgRef}
+        src={src}
+        alt={alt}
+        className={`lazy-image ${loaded ? 'loaded' : ''} ${className || ''}`}
+        {...props}
+      />
+    );
+  };
+
+  // Skeleton Components
+  const SkeletonText = ({ lines = 3 }) => (
+    <div className="skeleton-wrapper">
+      {Array.from({ length: lines }).map((_, i) => (
+        <div key={i} className={`skeleton skeleton-text ${i === 0 ? 'skeleton-title' : ''}`} style={{ width: i === 0 ? '60%' : i === lines - 1 ? '80%' : '100%' }} />
+      ))}
+    </div>
+  );
+
+  const SkeletonCard = () => (
+    <div className="skeleton skeleton-card" />
+  );
+
+  const SkeletonAvatar = () => (
+    <div className="skeleton skeleton-avatar" />
+  );
   return (
-    <div className={`App ${darkMode ? 'dark-mode' : ''}`}>
+    <div className={`App ${darkMode ? 'dark-mode' : ''} ${pageLoaded ? 'page-transition' : ''}`}>
       {/* Mouse Tracker */}
       <div 
         ref={mouseRef}
@@ -273,13 +345,13 @@ function App() {
       </nav>
 
       {/* Hero Section */}
-      <section id="home" className="hero">
+      <section id="home" className="hero section-animate">
         <div className="hero-container">
           <div className="hero-content">
             <div className="hero-image">
               <div className="profile-image">
                 <div className="image-placeholder">
-                  <img 
+                  <LazyImage 
                     src={`${process.env.PUBLIC_URL}/profile.jpg`} 
                     alt="Siddharth Senapati" 
                     className="profile-img"
@@ -321,7 +393,7 @@ function App() {
       </section>
 
       {/* Experience Section */}
-      <section id="experience" className="experience">
+      <section id="experience" className="experience section-animate">
         <div className="container">
           <h2 className="section-title">Professional Experience</h2>
           <div className="experience-timeline">
@@ -339,26 +411,12 @@ function App() {
                 </div>
               </div>
             </div>
-            <div className="experience-item">
-              <div className="experience-date">June 2023 - Dec 2023</div>
-              <div className="experience-content">
-                <h3>.NET Developer</h3>
-                <h4>Kyte Technology, Bhubaneswar</h4>
-                <p>Joined as a Trainee and upgraded to Full-Time Junior Developer within 3 months. Assisted actively in web development projects, debugged, added new features and acquired hands-on experience in technologies such as ASP.NET, SQL and JavaScript.</p>
-                <div className="experience-tech">
-                  <span>ASP.NET</span>
-                  <span>MS SQL Server</span>
-                  <span>JavaScript</span>
-                  <span>Web Development</span>
-                </div>
-              </div>
-            </div>
           </div>
         </div>
       </section>
 
       {/* Education Section */}
-      <section id="education" className="education">
+      <section id="education" className="education section-animate">
         <div className="container">
           <h2 className="section-title">Education</h2>
           <div className="education-grid">
@@ -386,7 +444,7 @@ function App() {
       </section>
 
       {/* Skills Section */}
-      <section id="skills" className="skills">
+      <section id="skills" className="skills section-animate">
         <div className="container">
           <h2 className="section-title">Technical Skills</h2>
           <div className="skills-content">
@@ -437,6 +495,11 @@ function App() {
                   <img className="skill-card-img" src={`${process.env.PUBLIC_URL}/techs/javascript.png`} alt="JavaScript"
                        onError={(e)=>{e.currentTarget.style.display='none'; e.currentTarget.nextElementSibling.style.display='block';}} />
                   <div className="skill-card-label" style={{display:'none'}}>JavaScript</div>
+                </div>
+                <div className="skill-card" title="React">
+                  <img className="skill-card-img" src={`${process.env.PUBLIC_URL}/techs/react.png`} alt="React"
+                       onError={(e)=>{e.currentTarget.style.display='none'; e.currentTarget.nextElementSibling.style.display='block';}} />
+                  <div className="skill-card-label" style={{display:'none'}}>React</div>
                 </div>
                 <div className="skill-card" title="HTML">
                   <img className="skill-card-img" src={`${process.env.PUBLIC_URL}/techs/HTML-logo.png`} alt="HTML/CSS"
@@ -495,7 +558,7 @@ function App() {
       </section>
 
       {/* Projects Section */}
-      <section id="projects" className="projects">
+      <section id="projects" className="projects section-animate">
         <div className="container">
           <h2 className="section-title">Featured Projects</h2>
           <div className="tabs">
@@ -716,7 +779,7 @@ function App() {
       </section>
 
       {/* Contact Section */}
-      <section id="contact" className="contact">
+      <section id="contact" className="contact section-animate">
         <div className="container">
           <h2 className="section-title">Get In Touch</h2>
           <div className="contact-content">
