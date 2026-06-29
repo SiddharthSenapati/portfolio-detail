@@ -17,6 +17,8 @@ function App() {
   const [sending, setSending] = useState(false);
   const [sendResult, setSendResult] = useState(null);
   const [pageLoaded, setPageLoaded] = useState(false);
+  const [showSplash, setShowSplash] = useState(true);
+  const [splashLogoSrc, setSplashLogoSrc] = useState(`${process.env.PUBLIC_URL}/splash-logo.png`);
   const phrases = React.useMemo(() => ['Full Stack .NET Developer', 'Web Developer', 'Tech Explorer & Continuous Learner'], []);
   const mouseRef = React.useRef(null);
   const rafRef = React.useRef(null);
@@ -195,6 +197,11 @@ function App() {
   // Page load animation
   useEffect(() => {
     setPageLoaded(true);
+    // Hide splash screen after animation
+    const splashTimer = setTimeout(() => {
+      setShowSplash(false);
+    }, 2000);
+    return () => clearTimeout(splashTimer);
   }, []);
 
   // Scroll animation for sections
@@ -262,7 +269,20 @@ function App() {
     <div className="skeleton skeleton-avatar" />
   );
   return (
-    <div className={`App ${darkMode ? 'dark-mode' : ''} ${pageLoaded ? 'page-transition' : ''}`}>
+    <>
+      {showSplash && (
+        <div className="splash-screen">
+          <div className="splash-content">
+            <img 
+              src={splashLogoSrc}
+              alt="Siddharth Senapati Logo"
+              className="splash-logo"
+              onError={() => setSplashLogoSrc(`${process.env.PUBLIC_URL}/abstract-logo.png`)}
+            />
+          </div>
+        </div>
+      )}
+      <div className={`App ${darkMode ? 'dark-mode' : ''} ${pageLoaded ? 'page-transition' : ''}`}>
       {/* Mouse Tracker */}
       <div 
         ref={mouseRef}
@@ -351,7 +371,7 @@ function App() {
             <div className="hero-image">
               <div className="profile-image">
                 <div className="image-placeholder">
-                  <LazyImage 
+                  <img 
                     src={`${process.env.PUBLIC_URL}/profile.jpg`} 
                     alt="Siddharth Senapati" 
                     className="profile-img"
@@ -839,6 +859,7 @@ function App() {
         </div>
       </footer>
     </div>
+    </>
   );
 }
 
